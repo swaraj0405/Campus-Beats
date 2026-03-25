@@ -25,7 +25,7 @@ public class EmailService {
     @Value("${app.frontend.url:http://localhost:5173}")
     private String frontendUrl;
     
-    @Value("${spring.mail.username}")
+    @Value("${app.email.from:paramjitbaral44@gmail.com}")
     private String fromEmail;
     
     public void sendVerificationEmail(String toEmail, String verificationToken) {
