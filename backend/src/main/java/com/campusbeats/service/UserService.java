@@ -178,7 +178,7 @@ public class UserService {
         } catch (Exception e) {
             System.out.println("Error in sendVerificationCode: " + e.getMessage());
             e.printStackTrace();
-            return false;
+            throw new RuntimeException("sendVerificationCode crash: " + e.getMessage(), e);
         }
     }
     
