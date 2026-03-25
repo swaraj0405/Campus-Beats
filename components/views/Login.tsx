@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiService } from '../../services/apiService';
+import { API_CONFIG } from '../../config/api';
 
 interface LoginProps {
   onLogin: (user: any, token: string) => void;
@@ -87,7 +88,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8081/api/users/email/${encodeURIComponent(email)}`);
+      const response = await fetch(`${API_CONFIG.BASE_URL}/users/email/${encodeURIComponent(email)}`);
       if (response.status === 200) {
         // User exists
         setEmailAvailable(false);

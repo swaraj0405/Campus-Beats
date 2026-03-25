@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { apiService } from '../../services/apiService';
+import { API_CONFIG } from '../../config/api';
 
 const EmailVerification: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -34,7 +35,7 @@ const EmailVerification: React.FC = () => {
 
   const verifyEmail = async (token: string) => {
     try {
-      const response = await fetch(`http://localhost:8081/api/auth/verify-email?token=${encodeURIComponent(token)}`, {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/auth/verify-email?token=${encodeURIComponent(token)}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

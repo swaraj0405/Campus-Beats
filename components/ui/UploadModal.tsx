@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { AppContext } from '../../App';
 import { AppContextType } from '../../types';
 import apiService from '../../services/apiService';
+import { API_CONFIG } from '../../config/api';
 
 interface UploadModalProps {
   isOpen: boolean;
@@ -37,7 +38,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose }) => {
       formData.append('album', album || '');
       formData.append('uploaderId', user.id);
 
-      const response = await fetch('http://localhost:8081/api/upload/track', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/upload/track`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`

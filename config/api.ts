@@ -1,7 +1,7 @@
 // API Configuration
 export const API_CONFIG = {
-  BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8081/api',
-  WEBSOCKET_URL: process.env.REACT_APP_WS_URL || 'http://localhost:8081/ws',
+  BASE_URL: import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:8081/api' : 'https://campus-beats.onrender.com/api'),
+  WEBSOCKET_URL: import.meta.env.VITE_WS_URL || (import.meta.env.DEV ? 'http://localhost:8081/ws' : 'wss://campus-beats.onrender.com/ws'),
   TIMEOUT: 10000, // 10 seconds
 };
 
