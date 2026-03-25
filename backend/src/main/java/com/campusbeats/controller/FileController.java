@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api/files")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000", "http://127.0.0.1:5173"})
+
 public class FileController {
     
     @Value("${app.upload.dir:uploads}")
