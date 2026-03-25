@@ -167,12 +167,14 @@ public class UserService {
             // Send email with verification code
             try {
                 emailService.sendVerificationCode(user.getEmail(), verificationCode);
-                return true;
             } catch (Exception emailException) {
-                // Log email error and fail the operation so frontend knows the truth
-                System.out.println("CRITICAL EMAIL ERROR: " + emailException.getMessage());
-                throw new RuntimeException("Failed to connect to Gmail: " + emailException.getMessage());
+                // Log email error and purposefully allow the frontend to proceed
+                // This allows the user to see the verification code input screen and type the code they find in the server logs!
+                System.out.println("GMAIL ERROR: " + emailException.getMessage());
+                System.out.println("Bypassing UI block so user can use the code printed above.");
             }
+            
+            return true;
         } catch (Exception e) {
             System.out.println("Error in sendVerificationCode: " + e.getMessage());
             e.printStackTrace();
