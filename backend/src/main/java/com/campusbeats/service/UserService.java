@@ -159,16 +159,20 @@ public class UserService {
             user.setVerificationCodeExpiry(expiryTime);
             userRepository.save(user);
             
+            // Log the verification code to the server console so it can be used even if email fails
+            System.out.println("==================================================");
+            System.out.println("VERIFICATION CODE FOR " + email + ": " + verificationCode);
+            System.out.println("==================================================");
+            
             // Send email with verification code
             try {
                 emailService.sendVerificationCode(user.getEmail(), verificationCode);
+                return true;
             } catch (Exception emailException) {
-                // Log email error but don't fail the entire operation
-                System.out.println("Email sending failed: " + emailException.getMessage());
-                // Continue with the operation - verification code is still saved in database
+                // Log email error and fail the operation so frontend knows the truth
+                System.out.println("CRITICAL EMAIL ERROR: " + emailException.getMessage());
+                throw new RuntimeException("Failed to connect to Gmail: " + emailException.getMessage());
             }
-            
-            return true;
         } catch (Exception e) {
             System.out.println("Error in sendVerificationCode: " + e.getMessage());
             e.printStackTrace();
